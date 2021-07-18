@@ -19,7 +19,7 @@ mongoose.connect(
 );
 
 const app = express();
-const PORT = 5000;
+const PORT = 3000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
