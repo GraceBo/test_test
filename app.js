@@ -40,6 +40,9 @@ app.all("*", (req, res) =>
   res.send("You've tried reaching a route that doesn't exist.")
 );
 
+app.use(express.static(path.join(__dirname, "public"))); // <- this line will us public directory as your static assets
+app.use("styles/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))); // <- This will use the contents of 'bootstrap/dist/css' which is placed in your node_modules folder as if it is in your '/styles/css' directory.
+
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)
 );
