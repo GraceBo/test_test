@@ -2,13 +2,14 @@ import mongoose from "mongoose";
 
 import { Article } from "../models/article.js";
 
+export const home = (req, res) => {
+  
+  return res.render("pages/home");
+};
+
 export const getArticles = async (req, res) => {
   try {
     const articles = await Article.find();
-    // return res.send({
-    //   success: true,
-    //   articles,
-    // });
     return res.render("pages/articles", {
       articles,
     });
@@ -33,10 +34,6 @@ export const createArticle = async (req, res) => {
     });
     const newArticle = await article.save();
     getArticles(req, res);
-    // res.send({
-    //   success: true,
-    //   message: `article with the name ${newArticle.title} added to the database`,
-    // });
   } catch (error) {
     res
       .status(400)
@@ -58,10 +55,6 @@ export const getArticle = async (req, res) => {
       return res.render("pages/blog", {
         article,
       });
-      // return res.send({
-      //   success: true,
-      //   article,
-      // });
     }
     return res.send({
       success: false,

@@ -1,14 +1,10 @@
 import express from "express";
 
-import {
-  getArticles,
-  createArticle,
-  getArticle,
-  deleteArticle,
-  publishArticle,
-} from "../controllers/articles.js";
+import {home, getArticles, createArticle, getArticle, deleteArticle, publishArticle,} from "../controllers/articles.js";
 
 const router = express.Router();
+
+router.get("/", home);
 
 router.get("/", getArticles);
 

@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import usersRoutes from "./routes/users.js";
 import articlesRoutes from "./routes/articles.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,7 +28,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static("./public"));
 
-app.use("/users", usersRoutes);
 app.use("/articles", articlesRoutes);
 
 app.get("/", (req, res) => res.render("pages/home"));
@@ -40,8 +38,8 @@ app.all("*", (req, res) =>
   res.send("You've tried reaching a route that doesn't exist.")
 );
 
-app.use(express.static(path.join(__dirname, "public"))); // <- this line will us public directory as your static assets
-app.use("styles/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))); // <- This will use the contents of 'bootstrap/dist/css' which is placed in your node_modules folder as if it is in your '/styles/css' directory.
+app.use(express.static(path.join(__dirname, "public")));
+app.use("styles/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
 
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)
