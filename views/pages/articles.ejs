@@ -1,0 +1,67 @@
+<%- include('../template/head')-%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<body class="text-center">
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <%- include('../template/nav')-%>
+        <h1 class="cover-heading">My Posts</h1>
+        <div class="container bg-light text-dark">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%articles.forEach(function(article) {%>
+                    <tr>
+                        <td><%=article.title%></td>
+                        <td><%=article.status%></td>
+                        <% if(article.status === 'draft'){%>
+                          <td><button  class="btn btn-secondary" onclick="postButton('<%=article._id%>')">publish</button></td>
+                        <%} else { %>
+                          <td><a href='/articles/<%=article._id%>' class="btn btn-secondary">View article</a></td>
+                        <%}%>
+                        <td><button  class="btn btn-danger" onclick="deleteButton('<%=article._id%>')">Delete</button></td>
+                    </tr>
+                    <%});%>
+                    
+                </tbody>
+            </table>
+        </div>
+        <%- include('../template/footer')-%>
+    </div>
+
+</body>
+<script>
+    function postButton(id)  {
+      $.ajax({
+          type: 'PATCH',
+          url: `/articles/${id}`,
+          processData: false,
+          contentType: 'application/merge-patch+json',
+          success: function(){
+                  if ( window.history.replaceState ) {
+                      window.history.replaceState( null, null, window.location.href );
+                      }
+                    location.reload();
+                }
+      });
+    }
+    function deleteButton(id)  {
+      $.ajax({
+          type: 'DELETE',
+          url: `/articles/${id}`,
+          processData: false,
+          contentType: 'application/merge-patch+json',
+          success: function(){
+                  if ( window.history.replaceState ) {
+                      window.history.replaceState( null, null, window.location.href );
+                      }
+                    location.reload();
+                }
+      });
+    }
+</script>
+</html>
