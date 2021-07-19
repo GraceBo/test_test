@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 mongoose.connect(
-  "mongodb+srv://akmal:@km@l123@cluster0.gqckr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "mongodb+srv://test_01:test_01@cluster0.gqckr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
