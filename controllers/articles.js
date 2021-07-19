@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 import { Article } from "../models/article.js";
 
-export const home = (req, res) => {
-  
-  return res.render("pages/home");
-};
 
 export const getArticles = async (req, res) => {
   try {
@@ -108,12 +104,6 @@ export const publishArticle = async (req, res) => {
       { status: "published" },
       { new: true }
     );
-    if (article) {
-      return res.send({
-        success: true,
-        message: `article with the id ${article._id} published`,
-      });
-    }
     return res.send({
       success: false,
       message: "no article found with provided id",
